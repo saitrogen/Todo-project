@@ -1,6 +1,6 @@
-import connectMongoDB from "@/lib/mongodb";
+import connectMongoDB from "../../../../lib/mongodb";
 import { NextResponse } from "next/server";
-import Topic from "@/app/models/topic";
+import Topic from "../../../../app/models/topic";
 
 /**
  * Handles a PUT request to update a single topic.
@@ -21,7 +21,8 @@ import Topic from "@/app/models/topic";
  */
 export async function PUT(request, { params }) {
   // Get the topic ID from the request parameters.
-  const { id } = params;
+  try {
+    const { id } = params;
 
   // Parse the request body as JSON and extract the new title and
   // description.
@@ -41,12 +42,23 @@ export async function PUT(request, { params }) {
   // Return a JSON response with a success message and a 200 status
   // code.
   return NextResponse.json({ message: "Topic updated" }, { status: 200 });
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json({ message: "Error updating topic (PUT)" }, { status: 500 });
+  }
+  
 }
 
 // GET request to fetch a single topic by ID.
 export async function GET(request,{ params }) {
-  const { id } = params;
-  await connectMongoDB();
-  const topic = await Topic.findById({_id:id});
-  return NextResponse.json({topic}, { status: 200 });
+  try {
+    const { id } = params;
+    await connectMongoDB();
+    const topic = await Topic.findOne({_id:id});
+    return NextResponse.json({topic}, { status: 200 });
+    
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json({ message: "Error fetching topic (GET)" }, { status: 500 });
+  }
 }

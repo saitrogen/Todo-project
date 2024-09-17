@@ -1,6 +1,6 @@
-import connectMongoDB from "@lib/mongodb";
+import connectMongoDB from "../../../lib/mongodb";
 import { NextResponse } from "next/server";
-import Topic from "@app/models/topic";
+import Topic from "../../models/topic";
 
 /**
  * Handles a POST request to create a new topic.
@@ -43,14 +43,19 @@ export async function GET() {
 }
 
 export async function DELETE(request) {
-  
-  const id =  request.nextUrl.searchParams.get("id");
+  const id = request.nextUrl.searchParams.get("id");
+  if (!id) {
+    return NextResponse.json(
+      { message: "Error deleting topics" },
+      { status: 500 }
+    );
+  }
 
   try {
     await connectMongoDB();
 
-    const topics = await Topic.findByIdAndDelete(id);
-    return NextResponse.json(topics);
+    await Topic.findByIdAndDelete(id);
+    return NextResponse.json({ message: "deleted" }, { status: 200 });
   } catch (error) {
     console.error(error);
     return NextResponse.json(
@@ -59,4 +64,3 @@ export async function DELETE(request) {
     );
   }
 }
-
