@@ -12,7 +12,7 @@
     },
     {
       "env": {
-        "build": true
+        "build": false
       },
       "rules": {
         "*": "off"
