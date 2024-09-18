@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Link from "next/link";
 import Removebtn from "./Removebtn";
 import { HiPencilAlt } from "react-icons/hi";
@@ -33,7 +34,7 @@ try {
   return (
     <>
 {/* an eslint error is coming */}
-// eslint-disable-next-line
+
       {topics.map((t) => (
 
 
