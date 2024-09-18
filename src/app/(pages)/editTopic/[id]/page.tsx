@@ -17,6 +17,7 @@ const getTopics = async (id) => {
 
 };
 
+
 export default async function editTopic({ params }) {
   // resiving id in the url ,so pasing it to the editTopicForm
   const { id } = params;
