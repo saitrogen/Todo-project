@@ -1,22 +1,6 @@
 {
   "extends": ["next/core-web-vitals", "next/typescript","next", "prettier"],
   "rules": {
-    "@typescript-eslint/no-explicit-any": "off"
-  },
-  "overrides": [
-    {
-      "files": ["src/components/TopicsList.tsx"],
-      "rules": {
-        "*": "off"
-      }
-    },
-    {
-      "env": {
-        "build": false
-      },
-      "rules": {
-        "*": "off"
-      }
-    }
-  ]
+    "no-explicit-any": "off"
+  }
 }

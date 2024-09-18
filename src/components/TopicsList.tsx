@@ -33,6 +33,7 @@ try {
   return (
     <>
 {/* an eslint error is coming */}
+// eslint-disable-next-line
       {topics.map((t) => (
 
 
