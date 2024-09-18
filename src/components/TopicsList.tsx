@@ -32,8 +32,8 @@ try {
 
   return (
     <>
-
-      {topics.map((t:{title:string,description:string,_id:string}) => (
+{/* an eslint error is coming */}
+      {topics.map((t) => (
 
 
         <div key={t._id} className="mt-8 flex justify-between p-4 border border-cyan-950 rounded shadow-lg">
