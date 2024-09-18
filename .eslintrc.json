@@ -1,6 +1,4 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript","next", "prettier"],
-  "rules": {
-    "no-explicit-any": "off"
-  }
+  "extends": ["next/core-web-vitals", "next/typescript","next", "prettier"]
+  
 }
