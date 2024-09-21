@@ -24,6 +24,7 @@ export default function EditTopicForm({ id, title, description }) {
       }
     } catch (error) {
       console.log("something wrong with editing:", error)
+      alert("An error occurred. Please try again later.");
     }
 
   }

@@ -23,6 +23,7 @@ export default function AddTopic() {
       })
 
       if (res.ok) {
+        alert("Topic added successfully");
         router.push("/");
         router.refresh();
 
@@ -31,7 +32,8 @@ export default function AddTopic() {
       }
     } catch (error) {
       console.log("something wrong:", error)
-      
+      alert("An error occurred. Please try again later.");
+      return;
     }
     
   }

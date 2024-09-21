@@ -32,7 +32,7 @@ export async function GET() {
   try {
     await connectMongoDB();
     const topics = await Topic.find();
-    return NextResponse.json(topics);
+    return NextResponse.json({topics}, { status: 200 });
   } catch (error) {
     console.error(error);
     return NextResponse.json(

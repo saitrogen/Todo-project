@@ -1,22 +1,24 @@
 /* eslint-disable */
+// "use client";
 import Link from "next/link";
 import Removebtn from "./Removebtn";
 import { HiPencilAlt } from "react-icons/hi";
+// import { useState } from "react";
 
 
-const getTopics = async (id:any) => {
+const getTopics = async (id: any) => {
   try {
-    const res = await fetch("/api/topics/", { cache: "no-store" });
-   
+    const res = await fetch("/api/topics",);
+
     if (!res.ok) {
-      throw new Error("failed to fetch topics");
-      
+      throw new Error("failed to fetch topics ,maybe error on the fetch url or fetching");
+
     }
     const data = await res.json();
     return { topics: data };
 
   } catch (error) {
-    console.log("error loading topics:");
+    console.log("error loading topics:", error);
     return { topics: [] }
   }
 
@@ -26,40 +28,51 @@ const getTopics = async (id:any) => {
 
 
 export default async function TopicsList() {
+  // const [topics, setTopics] = useState([]);
+  // const [loading, setLoading] = useState(false);
 
-try {
+  // const handleViewAllTopics = async () => {
+  //   setLoading(true);
+  //   try {
+  //     const { topics } = await getTopics("id");
+  //     setTopics(topics);
+  //   } catch (error) {
+  //     console.log("something wrong:", error);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
+
   const { topics } = await getTopics("id");
- 
 
   return (
     <>
-{/* an eslint error is coming */}
+      {/* <button onClick={handleViewAllTopics}>View All Topics</button> */}
+      {/* an eslint error is coming */}
+      {/* {loading ? (<div>Loading...</div>
+      ) : ( */}
 
-      {topics.map((t: { _id: string; title: string; description: string; }) => (
+
+        {topics.map((t: { _id: string; title: string; description: string; }) => (
 
 
-        <div key={t._id} className="mt-8 flex justify-between p-4 border border-cyan-950 rounded shadow-lg">
-          <div className="">
-            <h2 className="text-2xl font-bold text-slate-900 mb-1" >{t.title}</h2>
-            <div className="text-slate-700 font-semibold text-md mt-1">{t.description}</div>
+          <div key={t._id} className="mt-8 flex justify-between p-4 border border-cyan-950 rounded shadow-lg">
+            <div className="">
+              <h2 className="text-2xl font-bold text-slate-900 mb-1" >{t.title}</h2>
+              <div className="text-slate-700 font-semibold text-md mt-1">{t.description}</div>
+            </div>
+            <div className="flex items-start gap-2">
+              <Removebtn id={t._id} />
+              <Link href={`/editTopic/${t._id}`}><HiPencilAlt size={24} className="text-slate-900" />
+              </Link>
+            </div>
           </div>
-          <div className="flex items-start gap-2">
-            <Removebtn id={t._id} />
-            <Link href={`/editTopic/${t._id}`}><HiPencilAlt size={24} className="text-slate-900" />
-            </Link>
-          </div>
-        </div>
-      ))}
-
+        ))
+      };
     </>
   )
-} catch (error) {
-  console.log("something wrong:", error)
-  const { topics } = await getTopics("id");
-  if (!topics || topics.length === 0) {
-   
-    return <div className="text-slate-900">No topics found</div>;
-  }
-}
-  
+
 };
+
+ 
